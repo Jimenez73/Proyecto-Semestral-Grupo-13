@@ -39,7 +39,8 @@ class HltvScraper():
         response = self.scraper.get(url_team)
 
         if response.status_code != 200:
-            return
+            print(f"Error: {response.status_code}")
+            return "Error"
 
         soup = bs(response.text, features="html.parser")
         list_reset_grid = soup.find_all(class_="grid reset-grid")
@@ -66,7 +67,8 @@ class HltvScraper():
         response = self.scraper.get(url_team)
 
         if response.status_code != 200:
-            return
+            print(f"Error: {response.status_code}")
+            return "Error"
         
         soup = bs(response.text, features="html.parser")
         tabla = soup.find(class_="columns")
@@ -105,19 +107,18 @@ class HltvScraper():
 
         team: /id/nombre (e.g. /4608/natus-vincere)
         """
-
         df_players = pd.DataFrame()
         dict_players = self.players_of_team(team)
 
         counter = 0
-        while not dict_players and counter < 10:
+        while dict_players == "Error" and counter < 10:
             sleep(1)
             print("Reintentando hacer request...")
             dict_players = self.players_of_team(team)
             counter += 1
 
-        if not dict_players:
-            return
+        if dict_players == "Error":
+            return "Error"
 
         for link in dict_players.values():
             player = link.split("?")[0][14:]
@@ -133,6 +134,10 @@ class HltvScraper():
         """
         ulr_qualifier = "https://www.hltv.org/major/qualifier"
         response = self.scraper.get(ulr_qualifier)
+
+        if response.status_code != 200:
+            print(f"Error: {response.status_code}")
+            return "Error"
 
         soup = bs(response.text, features="html.parser")
         list_team_grid = soup.find_all(class_="majorTabSection teamsGridContainer")
@@ -162,7 +167,8 @@ class HltvScraper():
         response = self.scraper.get(ulr_career)
 
         if response.status_code != 200:
-            return
+            print(f"Error: {response.status_code}")
+            return "Error"
 
         soup = bs(response.text, features="html.parser")
         table = soup.find(class_="stats-table")
@@ -183,4 +189,45 @@ class HltvScraper():
 
         df = df.replace("-", np.nan)
         
+        return df
+            
+    def pistol_rounds(self, side: str) -> pd.DataFrame:
+        """
+        Retorna un DataFrame con las estadísticas anuales de los equipos para las
+        rondas de pistolas.
+
+        side: side ("both", "ct" "tt")
+        """
+        if side == "both":
+            side_param = ""
+        elif side == "ct":
+            side_param = "&side=COUNTER_TERRORIST"
+        elif side == "tt":
+            side_param = "&side=TERRORIST"
+
+        url_pistol_round = self.url_base + "/stats/teams/pistols" + self.params + side_param
+        response = self.scraper.get(url_pistol_round)
+        
+        if response.status_code != 200:
+            print(f"Error: {response.status_code}")
+            return "Error"
+        
+        soup_pistol_round = bs(response.text, features="html.parser")
+        info_pistol_round = soup_pistol_round.find(class_="stats-table player-ratings-table ftu")
+        table = info_pistol_round.find_all("tr")
+
+        label_cols = table[0].find_all("th")
+        label_cols = [col.text for col in label_cols]
+
+        df = pd.DataFrame(columns=label_cols)
+
+        for row in table[1:]:
+            cols = row.find_all("td")
+            cols = [col.text for col in cols]
+
+            df_temp = pd.DataFrame(data=[cols], columns=label_cols)        
+            df = pd.concat([df, df_temp], axis=0)
+
+        df = df.reset_index(drop=True)
+        df = df.rename(columns={"Round 2 convR2 conv": "Round 2 conv", "Round 2 breakR2 break": "Round 2 break"})
         return df
