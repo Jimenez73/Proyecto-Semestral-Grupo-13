@@ -15,6 +15,16 @@ class HltvScraper():
         today = date.today()
         self.def_params(today.replace(year=2023), today, "all", "all", "all")
 
+        self.dict_maps = {
+            "Ancient": 47,
+            "Anubis": 48,
+            "Dust2": 31,
+            "Inferno": 33,
+            "Mirage": 32,
+            "Nuke": 34,
+            "Vertigo": 46
+        }
+
     def def_params(self, statDate, endDate, matchType, maps, rankingFilter) -> None:
         """
         Define los paremetros de consulta.
@@ -234,10 +244,49 @@ class HltvScraper():
     
     def team_stats_by_map(self, team: str, map_name: str) -> pd.DataFrame:
         """
-        Retorna un DataFrame con las estadísticas del equipo en el mapa a analizar.
+        Retorna un DataFrame con las estadísticas del equipo en un mapa específico.
+
         team: /id/nombre (e.g. /4608/natus-vincere)
-        pueden poner su dustdos como ejemplo xdxd
+        map_name: Ancient, Anubis, Dust2, Inferno, Mirage, Nuke, Vertigo
         """
-        self.maps = map_name
-        self.def_params(self.statDate, self.endDate, self.matchType, self.maps, self.rankingFilter)
-        return self.stats_players_team(team)
+        try:
+            id_map = self.dict_maps[map_name]
+        except KeyError as error:
+            print("El nombre ingresado no es valido")
+            raise error
+
+        url_map = f"{self.url_base}/stats/teams/map/{id_map}/{team}{self.params}"
+        response = self.scraper.get(url_map)
+
+        if response.status_code != 200:
+            return f"Error {response.status_code}"
+
+        soup = bs(response.text, features="html.parser")
+
+        table = soup.find(class_="stats-rows standard-box")
+        table = table.find_all(class_="stats-row")
+
+        map_stats = {}
+        for row in table:
+            labels = [span.text for span in row.find_all('span')]
+            map_stats[labels[0]] = labels[1]
+
+        df = pd.DataFrame(data=map_stats, index=[0])
+        return df
+
+    def all_teams_stats_by_map(self, map_name: str) -> pd.DataFrame:
+        all_teams = pd.DataFrame()
+
+        teams_list = self.teams_major_qualifier()
+        groups = ["europa_1", "europa_2", "america_rmr", "asia_rmr"]
+
+        for teams_dict, group in zip(teams_list, groups):
+            for team in teams_dict.values():
+                df = self.team_stats_by_map(team, map_name)
+                df["group"] = group
+                all_teams = pd.concat([all_teams, df])
+
+                # Es importante detener el un tiempo el loop para evitar el error 429
+                sleep(1)
+
+        return all_teams
