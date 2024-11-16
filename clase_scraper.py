@@ -231,3 +231,13 @@ class HltvScraper():
         df = df.reset_index(drop=True)
         df = df.rename(columns={"Round 2 convR2 conv": "Round 2 conv", "Round 2 breakR2 break": "Round 2 break"})
         return df
+    
+    def team_stats_by_map(self, team: str, map_name: str) -> pd.DataFrame:
+        """
+        Retorna un DataFrame con las estadísticas del equipo en el mapa a analizar.
+        team: /id/nombre (e.g. /4608/natus-vincere)
+        pueden poner su dustdos como ejemplo xdxd
+        """
+        self.maps = map_name
+        self.def_params(self.statDate, self.endDate, self.matchType, self.maps, self.rankingFilter)
+        return self.stats_players_team(team)
