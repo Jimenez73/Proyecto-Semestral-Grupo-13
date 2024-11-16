@@ -231,13 +231,24 @@ class HltvScraper():
         df = df.reset_index(drop=True)
         df = df.rename(columns={"Round 2 convR2 conv": "Round 2 conv", "Round 2 breakR2 break": "Round 2 break"})
         return df
-    #MODIFICACION
+    #MODIFICACIONES AHORA CON EL URL CORRECTO(SORRY :D)
     def team_stats_by_map(self, team: str, map_name: str) -> pd.DataFrame:
-        """
-        Retorna un DataFrame con las estadísticas del equipo en el mapa a analizar.
-        team: /id/nombre (e.g. /4608/natus-vincere)
-        pueden poner su dustdos como ejemplo xdxd
-        """
-        self.maps = map_name
-        self.def_params(self.statDate, self.endDate, self.matchType, self.maps, self.rankingFilter)
-        return self.stats_players_team(team)
+        url_map = f"{self.url_base}/stats/teams/map/{map_name}/{team}{self.params}"
+        response = self.scraper.get(url_map)
+        if response.status_code != 200:
+            print(f"Error: {response.status_code}")
+            return pd.DataFrame()
+        soup = bs(response.text, features="html.parser")
+        table = soup.find(class_="stats-table player-ratings-table")
+        if not table:
+            print("No se encontró la tabla de estadísticas.")
+            return pd.DataFrame()
+        rows = table.find_all("tr")
+        headers = [header.text for header in rows[0].find_all("th")]
+        data = []
+        for row in rows[1:]:
+            cols = row.find_all("td")
+            cols = [col.text.strip() for col in cols]
+            data.append(cols)
+        df = pd.DataFrame(data, columns=headers)
+        return df
