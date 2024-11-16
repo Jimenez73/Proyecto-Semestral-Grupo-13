@@ -21,8 +21,8 @@ En el archivo ``Modelo de predicciones Counter-Strike.pdf``
 
 ### ETL
 
-- Terminar los métodos de extracción de datos (🛑 Estamos aquí)
-- Extraer todas la información que necesitamos
+- Terminar los métodos de extracción de datos
+- Extraer todas la información que necesitamos (🛑 Estamos aquí)
 - Juntarlos DataFrames en uno solo según corresponda para jugadores y para equipos
 - Limpiar los datos
     - Datos nulos
