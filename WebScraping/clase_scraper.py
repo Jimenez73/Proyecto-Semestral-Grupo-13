@@ -30,6 +30,7 @@ class HltvScraper():
             "ct": "&side=COUNTER_TERRORIST",
             "tt": "&side=TERRORIST"
         }
+        self.teams_list = []
 
     def def_params(self, statDate, endDate, matchType, maps, rankingFilter) -> None:
         """
@@ -46,6 +47,15 @@ class HltvScraper():
                        f"&matchType={self.matchType}&maps={self.maps}"
                        f"&rankingFilter={self.rankingFilter}")
         
+    # Test
+
+    def test(self) -> str:
+        """
+        Función para verificar que el scraper esté funcionando
+        """
+        response = self.scraper.get("https://www.hltv.org/stats")
+        return f"status_code: {response.status_code}"
+
     # Equipos participantes
 
     def teams_major_qualifier(self) -> list:
@@ -58,7 +68,7 @@ class HltvScraper():
 
         if response.status_code != 200:
             print(f"Error: {response.status_code}")
-            return "Error"
+            return
 
         soup = bs(response.text, features="html.parser")
         list_team_grid = soup.find_all(class_="majorTabSection teamsGridContainer")
@@ -74,6 +84,8 @@ class HltvScraper():
                 group[team] = id
             
             list_of_groups.append(group)
+
+        self.teams_list = list_of_groups
 
         return list_of_groups
     
@@ -98,29 +110,16 @@ class HltvScraper():
         tabla = soup.find(class_="columns")
         list_standard_box = tabla.find_all(class_="standard-box")
 
-        counter = 0
         stats = {}
-        group = ["Overall stats", "Opening stats", "Round stats", "Weapon stats"]
-        
+
         for box in list_standard_box:
-            stat_group = {}
-            
             for row in box.find_all(class_="stats-row"):
                 labels = [span.text for span in row.find_all('span')]
-                stat_group[labels[0]] = labels[-1]
+                stats[labels[0]] = labels[-1]
 
-            stats[group[counter]] = stat_group
-            counter += 1
 
-        # Gracias ChatGPT, código para crear un DataFrame con subcolumnas
-        df = pd.DataFrame(
-            {
-                (outer_key, inner_key): value 
-                   for outer_key, inner_dict in stats.items() 
-                   for inner_key, value in inner_dict.items()
-            },
-            index=[nickname]
-        )
+        df = pd.DataFrame(stats, index=[0])
+        df["Player"] = nickname
         
         return df
 
@@ -210,6 +209,7 @@ class HltvScraper():
             player = link.split("?")[0][14:]
             df = self.individual_stats(player)
             df_players = pd.concat([df_players, df])
+            sleep(0.3)
             
         return df_players
 
@@ -245,14 +245,48 @@ class HltvScraper():
         df = pd.DataFrame(data=map_stats, index=[0])
         return df
 
+    def matches_played(self, team: str) -> pd.DataFrame:
+        """
+        Retorna un DataFrame con los partidos jugados por el equipo específicado.
+
+        team: /id/nombre (e.g. /4608/natus-vincere)
+        """
+        url = self.url_base + "/stats/teams/matches/" + team + self.params
+        response = self.scraper.get(url)
+
+        if response.status_code != 200:
+            return f"Error {response.status_code}"
+
+        soup = bs(response.text, features="html.parser")
+        table = soup.find(class_="stats-table no-sort")
+
+        df = pd.DataFrame(columns=["Date", "Event", "Opponent", "Map", "Result", "W/L"])
+
+        for row in table.find_all('tr')[1:]:
+            cols = row.find_all("td")
+            cols = [col.text.strip() for col in cols]
+            cols.pop(2)
+            new_row = pd.DataFrame([cols], columns=df.columns)
+
+            df = pd.concat([df, new_row], ignore_index=True, axis=0)
+
+        return df 
+
    # Stats de todo los team participantes
 
     def all_teams_stats_by_map(self, map_name: str) -> pd.DataFrame:
+        """
+        Retorna un DataFrame con las estadísticas de todos los equipos participantes 
+        en un mapa específico.
+
+        map_name: Ancient, Anubis, Dust2, Inferno, Mirage, Nuke, Vertigo
+        """
         all_teams = pd.DataFrame()
 
-        teams_list = self.teams_major_qualifier()
+        if not self.teams_list:
+            self.teams_list = self.teams_major_qualifier()
 
-        for teams_dict, group in zip(teams_list, self.groups):
+        for teams_dict, group in zip(self.teams_list, self.groups):
             for team, link in teams_dict.items():
                 df = self.team_stats_by_map(link, map_name)
                 df["Group"] = group
@@ -264,14 +298,44 @@ class HltvScraper():
 
         return all_teams
     
-    def all_players_by_team(self) -> pd.DataFrame:
+    def all_maps_stats(self) -> pd.DataFrame:
+        df_maps = pd.DataFrame()
+
+        for map_name in self.dict_maps.keys():
+            df = self.all_teams_stats_by_map(map_name=map_name)
+            df["Map Name"] = map_name
+            df_maps = pd.concat([df_maps, df])
+            sleep(0.5)
+
+        return df_maps
+
+
+    def all_players_stats_by_team(self) -> pd.DataFrame:
         all_teams = pd.DataFrame()
 
-        teams_list = self.teams_major_qualifier()
+        if not self.teams_list:
+            self.teams_list = self.teams_major_qualifier()
 
-        for teams_dict, group in zip(teams_list, self.groups):
+        for teams_dict, group in zip(self.teams_list, self.groups):
             for team, link in teams_dict.items():
                 df = self.stats_players_team(link)
+                df["Group"] = group
+                df["Team"] = team
+                all_teams = pd.concat([all_teams, df])
+
+                sleep(1)
+
+        return all_teams
+
+    def all_matches_played_by_team(self) -> pd.DataFrame:
+        all_teams = pd.DataFrame()
+
+        if not self.teams_list:
+            self.teams_list = self.teams_major_qualifier()
+
+        for teams_dict, group in zip(self.teams_list, self.groups):
+            for team, link in teams_dict.items():
+                df = self.matches_played(link)
                 df["Group"] = group
                 df["Team"] = team
                 all_teams = pd.concat([all_teams, df])
@@ -279,7 +343,6 @@ class HltvScraper():
                 sleep(0.5)
 
         return all_teams
-
 
     # Stats generales
 
@@ -356,4 +419,3 @@ class HltvScraper():
             df = pd.concat([df, new_row], ignore_index=True, axis=0)
 
         return df
-    
