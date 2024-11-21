@@ -91,15 +91,18 @@ class HltvScraper():
     
     # Stats individuales
 
-    def individual_stats(self, player: str) -> pd.DataFrame:
+    def individual_stats(self, player: str, map_name: str) -> pd.DataFrame:
         """
         Retorna un DataFrame con las estadísticas individuales del jugador consultado
+        en cierto mapa
 
         player: /id/nickname (e.g. /9816/aleksib)
+        map_name: Ancient, Anubis, Dust2, Inferno, Mirage, Nuke, Vertigo
         """
-
         nickname = player.split("/")[2]
-        url_team = self.url_base + "/stats/players/individual" + player + self.params
+        map_param = f"&maps=de_{map_name.lower()}"
+
+        url_team = self.url_base + "/stats/players/individual" + player + self.params + map_param
         response = self.scraper.get(url_team)
 
         if response.status_code != 200:
@@ -185,12 +188,13 @@ class HltvScraper():
 
         return players
 
-    def stats_players_team(self, team: str) -> pd.DataFrame:
+    def stats_players_team(self, team: str, map_name: str) -> pd.DataFrame:
         """
         Retorna un DataFrame con las estadísticas individuales de cada integrante del
         equipo consultado.
 
         team: /id/nombre (e.g. /4608/natus-vincere)
+        map_name: Ancient, Anubis, Dust2, Inferno, Mirage, Nuke, Vertigo
         """
         df_players = pd.DataFrame()
         dict_players = self.players_of_team(team)
@@ -207,9 +211,9 @@ class HltvScraper():
 
         for link in dict_players.values():
             player = link.split("?")[0][14:]
-            df = self.individual_stats(player)
+            df = self.individual_stats(player, map_name)
             df_players = pd.concat([df_players, df])
-            sleep(0.3)
+            sleep(0.5)
             
         return df_players
 
@@ -309,8 +313,7 @@ class HltvScraper():
 
         return df_maps
 
-
-    def all_players_stats_by_team(self) -> pd.DataFrame:
+    def all_players_stats_by_team(self, map_name: str) -> pd.DataFrame:
         all_teams = pd.DataFrame()
 
         if not self.teams_list:
@@ -318,14 +321,22 @@ class HltvScraper():
 
         for teams_dict, group in zip(self.teams_list, self.groups):
             for team, link in teams_dict.items():
-                df = self.stats_players_team(link)
+                df = self.stats_players_team(link, map_name)
                 df["Group"] = group
                 df["Team"] = team
                 all_teams = pd.concat([all_teams, df])
 
-                sleep(1)
-
         return all_teams
+
+    def all_maps_players_stats(self) -> pd.DataFrame:
+        df_maps = pd.DataFrame()
+
+        for map_name in self.dict_maps.keys():
+            df = self.all_players_stats_by_team(map_name)
+            df["Map Name"] = map_name
+            df_maps = pd.concat([df_maps, df])
+
+        return df_maps
 
     def all_matches_played_by_team(self) -> pd.DataFrame:
         all_teams = pd.DataFrame()
@@ -386,7 +397,7 @@ class HltvScraper():
         df = df.rename(columns={"Round 2 convR2 conv": "Round 2 conv", "Round 2 breakR2 break": "Round 2 break"})
         return df
 
-    def ftu_teams(self, side: str):
+    def ftu_teams(self, side: str) -> pd.DataFrame:
         """
         Retorna un DataFrame con las estadísticas ftu generales de los equipos.
 

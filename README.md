@@ -27,7 +27,7 @@ Datos públicos sacados de la página web [HLTV](https://www.hltv.org/stats) uti
 
 - Terminar los métodos de extracción de datos
 - Extraer todas la información que necesitamos
-- Juntarlos DataFrames en uno solo según corresponda para jugadores y para equipos (🛑 Estamos aquí)
+- Juntarlos DataFrames en uno solo según corresponda para jugadores y para equipos
 - Limpiar los datos
     - Datos nulos
     - Datos duplicados
@@ -35,7 +35,7 @@ Datos públicos sacados de la página web [HLTV](https://www.hltv.org/stats) uti
 
 ### EDA
 
-- Identificar las variables que afectan a las victorias del equipo
+- Identificar las variables que afectan a las victorias del equipo (🛑 Estamos aquí)
 
 ### Modelo
 
