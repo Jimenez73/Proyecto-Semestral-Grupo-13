@@ -23,7 +23,7 @@ Datos públicos sacados de la página web [HLTV](https://www.hltv.org/stats) uti
 
 ## Cosas por hacer
 
-### ETL
+### 1. ETL
 
 - Terminar los métodos de extracción de datos
 - Extraer todas la información que necesitamos
@@ -33,13 +33,21 @@ Datos públicos sacados de la página web [HLTV](https://www.hltv.org/stats) uti
     - Datos duplicados
     - Formato correcto (Dtypes)
 
-### EDA
+### 2. EDA
 
 - Identificar las variables que afectan a las victorias del equipo (🛑 Estamos aquí)
 
-### Modelo
+### 3. Modelo
 
-- Crear un modelo que prediga los efrentamientos entre equipos
+##### Crear un modelo que prediga los efrentamientos entre equipos
+- Entrenar diferentes modelos
+    - Regresiones o clasificación
+    - Hacer cross validation
+    - Escoger el mejor
+
+### 4. Ganador del Major
+
+- Aplicar el modelo seleccionado para decir quien ganará el Major
 
 ---
 

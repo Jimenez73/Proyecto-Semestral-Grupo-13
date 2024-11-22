@@ -357,12 +357,13 @@ class HltvScraper():
 
     # Stats generales
 
-    def pistol_rounds(self, side: str) -> pd.DataFrame:
+    def pistol_rounds(self, side: str, map_name: str) -> pd.DataFrame:
         """
         Retorna un DataFrame con las estadísticas anuales de los equipos para las
         rondas de pistolas.
 
         side: side ("both", "ct" "tt")
+        map_name: Ancient, Anubis, Dust2, Inferno, Mirage, Nuke, Vertigo
         """
         try:
             side_param = self.dict_sides[side]
@@ -370,7 +371,9 @@ class HltvScraper():
             print("El side ingresado no es valido")
             raise error
         
-        url_pistol_round = self.url_base + "/stats/teams/pistols" + self.params + side_param
+        map_param = f"&maps=de_{map_name.lower()}"
+        
+        url_pistol_round = self.url_base + "/stats/teams/pistols" + self.params + side_param + map_param + "&minMapCount=0"
         response = self.scraper.get(url_pistol_round)
         
         if response.status_code != 200:
@@ -397,11 +400,12 @@ class HltvScraper():
         df = df.rename(columns={"Round 2 convR2 conv": "Round 2 conv", "Round 2 breakR2 break": "Round 2 break"})
         return df
 
-    def ftu_teams(self, side: str) -> pd.DataFrame:
+    def ftu_teams(self, side: str, map_name: str) -> pd.DataFrame:
         """
         Retorna un DataFrame con las estadísticas ftu generales de los equipos.
 
         side: side ("both", "ct" "tt")
+        map_name: Ancient, Anubis, Dust2, Inferno, Mirage, Nuke, Vertigo
         """
         try:
             side_param = self.dict_sides[side]
@@ -409,7 +413,9 @@ class HltvScraper():
             print("El side ingresado no es valido")
             raise error
         
-        url_pistol_round = self.url_base + "/stats/teams/ftu" + self.params + side_param
+        map_param = f"&maps=de_{map_name.lower()}"
+        
+        url_pistol_round = self.url_base + "/stats/teams/ftu" + self.params + side_param + map_param + "&minMapCount=0"
         response = self.scraper.get(url_pistol_round)
         
         if response.status_code != 200:
@@ -430,3 +436,23 @@ class HltvScraper():
             df = pd.concat([df, new_row], ignore_index=True, axis=0)
 
         return df
+    
+    def maps_pistols(self) -> pd.DataFrame:
+        df_maps = pd.DataFrame()
+
+        for map_name in self.dict_maps.keys():
+            df = self.pistol_rounds("both", map_name)
+            df["Map Name"] = map_name
+            df_maps = pd.concat([df_maps, df])
+
+        return df_maps
+
+    def maps_ftu(self) -> pd.DataFrame:
+        df_maps = pd.DataFrame()
+
+        for map_name in self.dict_maps.keys():
+            df = self.ftu_teams("both", map_name)
+            df["Map Name"] = map_name
+            df_maps = pd.concat([df_maps, df])
+
+        return df_maps
