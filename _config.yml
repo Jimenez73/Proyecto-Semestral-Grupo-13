@@ -1,7 +1,7 @@
 title: Modelo de Predicciones de Counter-Strike 2
 description: "Proyecto de Ciencia de Datos para la creación de un modelo de predicciones de partidos profesionales del Counter-Strike 2"
 baseurl: ""
-url: "https://jimenez73.github.io/Proyecto-Semestral-Grupo-13/#uso-del-repositorio"
+url: "https://jimenez73.github.io/Proyecto-Semestral-Grupo-13/"
 
 # Build settings
 theme: minima
@@ -16,14 +16,14 @@ plugins:
 # Excluded items can be processed by explicitly listing the directories or
 # their entries' file path in the `include:` list.
 #
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
