@@ -7,6 +7,6 @@ title: Inicio
 
 Esta es una página web que explica mi repositorio. Aquí encontrarás:
 
-- [Datos](/datos/)
-- [Gráficos y modelos](/graficos/)
-- [Documentación](/documentacion/)
+- [Datos](datos/)
+- [Gráficos y modelos](graficos/)
+- [Documentación](documentacion/)
