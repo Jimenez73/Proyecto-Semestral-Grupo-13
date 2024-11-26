@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Inicio"
+title: Inicio
 ---
 
 # Bienvenido a mi proyecto

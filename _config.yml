@@ -1,7 +1,7 @@
 title: Modelo de Predicciones de Counter-Strike 2
-description: "Proyecto de Ciencia de Datos para la creación de un modelo de predicciones de partidos profesionales del Counter-Strike 2"
-baseurl: ""
-url: "https://jimenez73.github.io/Proyecto-Semestral-Grupo-13/"
+description: Proyecto de Ciencia de Datos para la creación de un modelo de predicciones de partidos profesionales del Counter-Strike 2
+baseurl:
+url: https://jimenez73.github.io/Proyecto-Semestral-Grupo-13/
 
 # Build settings
 theme: minima
