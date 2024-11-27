@@ -4,4 +4,4 @@ title: "Documentación"
 permalink: /documentacion/
 ---
 
-Hola
+(Completar)
