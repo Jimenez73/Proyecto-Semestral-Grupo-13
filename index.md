@@ -5,7 +5,7 @@ title: Inicio
 
 # Bienvenido/a al Proyecto
 
-En esta página web se explicarán las principales partes del proyecto. Aquí encontrarás una explicación general de nuestra motivación y proceso de creación del modelo. Además de una explicación más extendida del proceso de extracción, transformación y limpieza de los datos, como se escogió y preparó el modelo, y una documentación sobre el uso de los principales componentes del proyecto. 
+En esta página web se explicarán las principales partes del proyecto. Encontrarás una explicación general de nuestra motivación y proceso de creación del modelo, además de una explicación más extendida del proceso de extracción, transformación y limpieza de los datos; como se escogió y preparó el modelo; y una documentación sobre el uso de los principales componentes del proyecto. 
 
 - [Datos](datos/)
 - [Modelos](modelo/)
@@ -13,23 +13,22 @@ En esta página web se explicarán las principales partes del proyecto. Aquí en
 
 # Qué es Counter-Strike 2
 
-(Revisar)
+Counter-Strike 2 (CS2) es el último juego de la saga Counter-Stike desarrollada por Valve, lanzado en 2023, CS2 al igual que sus predecesores, es un juego multijugador tactico de disparos en primera persona. En su modo de juego principal y más popular, la partidas competitivas, dos equipos de cinco jugadores cada uno, se enfrentan en una partida de 24 rondas en alguno de los 7 mapas activos, donde el primero en ganar 13 de ellas se lleva la victoria. Las partidas competitivas están divididas en dos mitades de 12 rondas cada una, en la primera mitad, uno de los equipos juega como el bando antiterrorista y el otro como el bando terrorista, y en la siguiente mitad, los equipos cambian de bandos. En cada ronda los terroristas tienen como objetivo plantar una bomba en alguno de los dos puntos especiales del mapa o bien eliminarlos a todos los antiterroristas. Por otro lado, los antiterroristas tienen como objetivo defender estos puntos por la duración de la ronda, desactivar la bomba en caso de ser plantada o bien eliminar a todos los terroristas.
 
-Counter-Strike 2 o CS2 es un juego multijugador de disparos en primera persona (o FPS por sus siglas en inglés) en el cual dos equipos de cinco jugadores cada uno, se enfrentan en una partida de 24 rondas en alguno de los 7 mapas activos, donde el primero en ganar 13 de ellas se lleva la victoria. Las partidas competitivas están divididas en dos mitades de 12 rondas cada una, en la primera mitad, uno de los equipos juega como el bando antiterrorista y el otro como el bando terrorista, y en la siguiente mitad, los equipos cambian de bandos. En cada ronda los terroristas tienen como objetivo plantar una bomba en alguno de los dos puntos especiales del mapa o bien eliminarlos a todos los antiterroristas. Por otro lado, los antiterroristas tienen como objetivo defender estos puntos por la duración de la ronda, desactivar la bomba en caso de ser plantada o bien eliminar a todos los terroristas.
+El juego posee mecánicas de juego simples pero capaces de complejizar el juego enormemente, haciendo que cada partida sea única y diferente a la anterior, elevando el nivel de los jugadores mientras más tiempo jueguen. Las más destacables son:
+
+1. La economía del juego: En cada ronda, ambos bandos reciben dinero por las acciones de la ronda anterior, con este dinero, los equipos compran su equipamiento para la ronda, incluyendo armas, grandas y armadura, en otros.
+2. El patrón de dispersión de las armas: Todas y cada una de las armas disponibles para ambos bandos poseen un patrón de dispersión único cuando se disparan, dominar estos patrones ofrece una gran ventaja sobre los rivales. Además, este se ve afectado fuertemente por el movimiento, por lo que se favorece una jugabilidad pausada y metódica.
+
+En general, el juego premia el trabajo en equipo y la buena comunicación entre sus integrantes. Gracias a esto, el juego no tan solo goza de una comunidad activa de más de 20 millones de jugadores mensules, también posee una escena profesional y donde se compite por premios millonarios.
 
 # Escena profesional
 
 (Completar)
 
-# Qué es el Major
-
-(Completar)
-
 # Motivación de la investigación
 
-(Revisar)
-
-En los próximos días comienza el Major de Counter-Strike 2 (CS2), la competencia más importante para los equipos profesionales del videojuego, con una suma de premios de 1,250,000 $USD. Este es un evento presencial y que se transmite online con miles de espectadores. Además de los premios, el evento mueve mucho dinero a través ventas en el juego de artículos exclusivos y de mercados de la comunidad con la compra y venta de recompensas por participar en las predicciones del Major, en un mini juego dentro de CS2 conocido como “Pick'em”. También se producen apuestas en páginas externas al juego.
+Cada año se juegan  comienza el Major de Counter-Strike 2 (CS2), la competencia más importante para los equipos profesionales del videojuego, con una suma de premios de 1,250,000 $USD. Este es un evento presencial y que se transmite online con miles de espectadores. Además de los premios, el evento mueve mucho dinero a través ventas en el juego de artículos exclusivos y de mercados de la comunidad con la compra y venta de recompensas por participar en las predicciones del Major, en un mini juego dentro de CS2 conocido como “Pick'em”. También se producen apuestas en páginas externas al juego.
 
 Debido a la gran cantidad de datos que existe de los equipo y jugadores profesionales, vimos una gran oportunidad para estudiar el funcionamiento de las apuestas y cómo éstas se ven influenciadas por las distintas a características que conforman a los equipos. Esto con el fin de poder predecir con la mayor precisión posible los resultados de los partidos entre los equipos, y así tal vez poder reconocer el campeón del Major antes de que inicie el torneo principal.
 
