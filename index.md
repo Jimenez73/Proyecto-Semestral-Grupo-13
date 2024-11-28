@@ -34,35 +34,18 @@ Debido a la gran cantidad de datos que existe de los equipo y jugadores profesio
 
 # Preguntas de Investigación
 
-(Revisar)
-
-Nuestras preguntas iniciales fueron:
+Nuestras preguntas de investigación finales utilizadas para realizar el proyecto fueron:
 
 + Variables que afectan en el juego:
-    + ¿Qué factores dentro del juego tienen mayor impacto en el resultado final?
-    + ¿Cómo influye el desempeño económico de cada equipo durante la partida para la predicción del resultado final?
+    + ¿Qué factores del equipo son los que más influencian el resultado?
+    + ¿Qué métricas de los jugadores del equipo afectan más al porcentaje de victorias del equipo?
 + Considerando selección de mapas:
     + ¿Hay cierta correlación entre los mapas elegidos y el porcentaje de victorias de cada equipo?
-+ Ubicación del torneo y presencia de público:
-    + ¿Hay diferencia significativa en el rendimiento de los equipos que juegan torneos virtuales y aquellos que lo hacen presencialmente?
-    + ¿De qué manera influye la presencia del público en vivo el desempeño de los jugadores?
+    + ¿Cómo varían las posibilidades de que un equipo le gane a otro dependiendo del mapa escogido?
++ Viabilidad del modelo:
+    + ¿Es posible realizar un modelo de predicciones con buenas metricas utilizando datos generales de los jugadores y equipos?
 
-Pero un vez extraidos los datos revisados en más profundidad, nos dimos cuentas que sobre la economía durante la partida, los datos son limitados, pero existen algunos que representan en menor medida el desempeño económico del equipo, como algunas estadísticas de pistols rounds. Para realizar un análisis de reemplazo, profundizaremos más en la primera pregunta:
-
-+ ¿Qué factores del equipo son los que más influencian el resultado?
-+ ¿Qué métricas de los jugadores del equipo afectan más al porcentaje de victorias del equipo?
-
-Esto cambia el enfoque a realizar predicciones sobre las métricas generales del equipo y sus jugadores, y no tanto así sobre las métricas individuales de cada partida. Además, sobre la ubicación y presencialidad del torneo se decidió que eran variables irrelevantes dada la naturaleza del juego. Es posible que exista algún tipo de correlación con el porcentaje de victorias del equipo, pero nuevamente, los datos sobre esto son limitados y requerirían todo un trabajo aparte que se escapa del objetivo pricipal del proyecto. Por lo tanto, se realizará un analisis de los datos sin importar que tipo de evento es y trantando de responder a preguntas sobre las posibilidades de cada equipo a ganar sobre otro
-
-El EDA nos muestra que efectivamente hay relaciones entre las stats de los jugadores y las stats de los equipo con su porcentaje de vistorias. Esto responde a una de nuestras preguntas y confirma que la elección de mapas es importante y que la relevancia de los datos varían entre ellos. Por lo tanto, nos preguntamos: ¿Cómo varían las posibilidades de que un equipo le gane a otro dependiendo del mapa escogido?
-
-# Objetivos
-
-(Completar)
-
-Creación de un modelo de predicción
-
-# Limitaciones del modelo
+# Resultados
 
 (Completar)
 

@@ -23,6 +23,5 @@ exclude:
 header_pages:
   - index.md
   - secciones/datos.md
-  - secciones/documentacion.md
   - secciones/modelo.md
-  - about.md
+  - secciones/documentacion.md
