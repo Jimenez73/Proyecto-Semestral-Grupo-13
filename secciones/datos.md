@@ -21,7 +21,7 @@ Se desarrolló la clase `HltvScraper`, que incluye múltiples métodos para la r
 
 Ejemplo: matches_played
 
-![matches](assets/images/matches_played.png)
+![matches](../assets/images/matches_played.png)
 
 
 # Limpieza y trasformación
@@ -47,10 +47,10 @@ Los pasos de limpieza y transformación de datos más relevantes fueron:
 
 Aqui se muestran ejemplos de los datos almacenados en DataFrames ya limpios:
 1. **Datos de Partidos Jugados** (`df_matches`):
-   ![matches](assets/images/matches.png)
+   ![matches](../assets/images/matches.png)
 
 2. **Datos de Jugadores** (`df_players`):
-   ![players](assets/images/players.png)
+   ![players](../assets/images/players.png)
 
 3. **Datos de Equipos** (`df_teams`):
-   ![teams](assets/images/teams.png)
+   ![teams](../assets/images/teams.png)
