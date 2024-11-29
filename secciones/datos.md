@@ -6,11 +6,11 @@ permalink: /datos/
 
 # Datos utilizados
 
-Para este proyecto se utilizaron los datos proporcionados por la página web [HLTV](https://www.hltv.org), la cual recopila todas las estadíticas de los partidos profesionales jugados. Los datos en la página están ordenados y agrupados de forma efectiva y accesible, entre estos datos están las estadísticas completas de los equipos y de sus jugadores, sumado a cada uno de los partidos jugados por todos ellos.
+Para este proyecto se utilizaron los datos proporcionados por la página web [HLTV](https://www.hltv.org), la cual recopila todas las estadísticas de los partidos profesionales jugados. Los datos en la página están ordenados y agrupados de forma efectiva y accesible, entre estos datos están las estadísticas completas de los equipos y de sus jugadores, sumado a cada uno de los partidos jugados por todos ellos.
 
 # Extracción de datos
 
-Dado que HLTV no cuenta con una API, tuvimos que utilizar técnicas de web scraping para extraer la información. La utilización de ``cloudscraper`` para pasar la verificación de Cloudflare y ``BeautifulSoup`` para extraer la información de HTML a DataFrames de ``Pandas`` resulto primordial en este proceso.
+Dado que HLTV no cuenta con una API, tuvimos que utilizar técnicas de web scraping para extraer la información. La utilización de ``cloudscraper`` para pasar la verificación de Cloudflare y ``BeautifulSoup`` para extraer la información de HTML a DataFrames de ``Pandas`` resultó primordial en este proceso.
 
 Se desarrolló la clase `HltvScraper`, que incluye múltiples métodos para la realización de la extracción de manera ordenada. Tenemos:
 
@@ -21,7 +21,7 @@ Se desarrolló la clase `HltvScraper`, que incluye múltiples métodos para la r
 
 Ejemplo: matches_played
 
-![matches](assets/images/matches_played.png)
+![matches](../assets/images/matches_played.png)
 
 
 # Limpieza y trasformación
@@ -32,7 +32,7 @@ Los pasos de limpieza y transformación de datos más relevantes fueron:
    En los métodos de extracción de datos (`teams_major_qualifier()`, `individual_stats()`, etc.) del archivo `clase_scraper.py`, se verificó que las respuestas fueran exitosas (es decir, status_code == 200) para asegurar que solo se trabajara con datos válidos.
 
 2. **Conversión de Tipos de Datos**:  
-   En `career_player(player)` y `individual_stats(player, map_name)`, se convirtieron columnas de texto a formatos numéricos para así facilitar el analisis.
+   En `career_player(player)` y `individual_stats(player, map_name)`, se convirtieron columnas de texto a formatos numéricos para así facilitar el análisis.
 
 3. **Transformación de Datos a Formato Tabular**:  
    Los datos extraídos se organizaron en `DataFrames` de `pandas` en métodos como `career_player(player)` y `matches_played(team)` para tener una estructura consistente.
@@ -45,12 +45,12 @@ Los pasos de limpieza y transformación de datos más relevantes fueron:
 
 # Muestra de los Datos
 
-Aqui se muestran ejemplos de los datos almacenados en DataFrames ya limpios:
+Aquí se muestran ejemplos de los datos almacenados en DataFrames ya limpios:
 1. **Datos de Partidos Jugados** (`df_matches`):
-   ![matches](assets/images/matches.png)
+   ![matches](../assets/images/matches.png)
 
 2. **Datos de Jugadores** (`df_players`):
-   ![players](assets/images/players.png)
+   ![players](../assets/images/players.png)
 
 3. **Datos de Equipos** (`df_teams`):
-   ![teams](assets/images/teams.png)
+   ![teams](../assets/images/teams.png)

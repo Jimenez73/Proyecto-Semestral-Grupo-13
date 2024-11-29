@@ -39,7 +39,7 @@ match_predictor(
 ) -> pd.DataFrame
 ```
 
-Dados dos equipo, la función entrega estimaciones para cada equipo de ganar frente al otro en cada uno de los mapas
+Dado dos equipo, la función entrega estimaciones para cada equipo de ganar frente al otro en cada uno de los mapas.
 
 ``Parametros:``
 - team_x: str
@@ -60,7 +60,7 @@ Entrega un DataFrame de pandas donde se muestra el mapa que se jugará luego de 
 ```
 BO3(probs_df=None) -> pd.DataFrame
 ```
-Entrega un DataFrame de pandas donde se muestran los tres mapas que se jugarán, luego de que cada equipo elimine sus mapas más desfavorables y escoja los más favorable, simulando un enfrentamiento al mejor de tres
+Entrega un DataFrame de pandas donde se muestran los tres mapas que se jugarán, luego de que cada equipo elimine sus mapas más desfavorables y escoja los más favorable, simulando un enfrentamiento al mejor de tres.
 
 ``Parametros:``
 - probs_df: pd.DataFrame
@@ -96,11 +96,11 @@ Dado dos equipos, simula quién gana y quién pierde usando el promedio de las p
 
 ``Standings.simulate() -> list``
 
-Simula todo el torneo en su totalidad siguiendo el orden en que se introducieron los equipo. Un equipo deja de jugar cuando gana 3 veces, o bien, pierde 3 veces
+Simula todo el torneo en su totalidad siguiendo el orden en que se introducieron los equipo. Un equipo deja de jugar cuando gana 3 veces, o bien, pierde 3 veces.
 
 ``Standings.final_results() -> None``
 
-Imprime el estado actual del grafo
+Imprime el estado actual del grafo.
 
 ```
 playoffs(teams: list) -> None
@@ -120,7 +120,7 @@ Librerías externas necesarias para utilizar HltvScraper:
 
 ``def_params(self, statDate, endDate, matchType, maps, rankingFilter) -> None``
 
-Define los headers principales para consultar información
+Define los headers principales para consultar información.
 
 ``test() -> str``
 
