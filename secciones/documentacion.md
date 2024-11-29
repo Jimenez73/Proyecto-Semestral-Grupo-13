@@ -26,7 +26,10 @@ permalink: /documentacion/
 
 # <a id="Uso-del-modelo"></a> Uso del modelo
 
-En el contexto de 
+Librerías externas necesarias para utilizar el modelo:
+
+1. ``pandas``
+3. ``xgboost``
 
 ## <a id="Predictor-de-partidos"></a> Predictor de partidos
 ```
@@ -36,12 +39,13 @@ match_predictor(
 ) -> pd.DataFrame
 ```
 
+Dados dos equipo, la función entrega estimaciones para cada equipo de ganar frente al otro en cada uno de los mapas
 
 ``Parametros:``
 - team_x: str
 - team_y: str
-- model: 
-- df_teams: DataFrame
+- model: Modelo de clasificación binaria
+- df_teams: pd.DataFrame
 - feature_names: list
 
 ## <a id="BO1-BO3"></a> BO1 y BO3
@@ -51,36 +55,68 @@ BO1(probs_df=None) -> pd.DataFrame
 Entrega un DataFrame de pandas donde se muestra el mapa que se jugará luego de que cada equipo elimine sus mapas más desfavorables, simulando así un enfrentamiento al mejor de uno.
 
 ``Parametros:``
-- probs_df: DataFrame 
+- probs_df: pd.DataFrame 
 
 ```
 BO3(probs_df=None) -> pd.DataFrame
 ```
-Entrega un DataFrame de pandas donde se muestran los tres mapas que se jugarán luego de que cada equipo elimine sus mapas más desfavorables y escoja los más favorable, simulando un enfrentamiento al mejor de tres.
+Entrega un DataFrame de pandas donde se muestran los tres mapas que se jugarán, luego de que cada equipo elimine sus mapas más desfavorables y escoja los más favorable, simulando un enfrentamiento al mejor de tres
 
 ``Parametros:``
-- probs_df: DataFrame
+- probs_df: pd.DataFrame
 
 
 ## <a id="Etapas-del-Major"></a> Etapas del Major
+
+```
+Team()
+```
+
+Clase que almacena el nombre del equipo, las victorias y las derrotas de este.
+
+```
+Nodo()
+```
+
+Clase que modela un nodo para la clase ``Standings``, en él se guardan los equipos que tienen las mismas victorias y derrotas que representa el nodo.
+
 ```
 Standings()
 ```
-``Standings.add_team(team=None) -> None``
 
-``Standings.match() -> None``
+Clase con estructura de grafo con Nodos y Teams, que representa la estructa de que siguen los Standings del Major.
+
+``Standings.add_team(team: Team) -> None``
+
+Dado un equipo, el método lo añade a primer nodo (0-0).
+
+``Standings.match(team_x: Team, team_y: Team, BO1_: bool) -> None``
+
+Dado dos equipos, simula quién gana y quién pierde usando el promedio de las probabilidades que obtiene de BO1 (en caso que BO1_=True) y BO3 (caso contrario). Para así moverlos al nodo correspondiente.
+
+``Standings.simulate() -> list``
+
+Simula todo el torneo en su totalidad siguiendo el orden en que se introducieron los equipo. Un equipo deja de jugar cuando gana 3 veces, o bien, pierde 3 veces
 
 ``Standings.final_results() -> None``
 
-``Standings.simulate() -> list``
+Imprime el estado actual del grafo
 
 ```
 playoffs(teams: list) -> None
 ```
 
+Función que toma los equipos de la lista en el orden dado y los enfrenta de a pares en partidos tipo BO3 (eligiendo el que gana con el promedio de las probabilidades) hasta que quede uno, imprimiendo en el proceso los partidos jugados y el ganador.
+
 ---
 
 # <a id="HltvScraper"></a> Uso de HltvScraper
+
+Librerías externas necesarias para utilizar HltvScraper:
+
+1. ``Pandas``
+2. ``BeautifulSoup``
+3. ``cloudscraper``
 
 ``def_params(self, statDate, endDate, matchType, maps, rankingFilter) -> None``
 
