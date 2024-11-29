@@ -26,7 +26,11 @@ En general, el juego premia el trabajo en equipo y la buena comunicación entre 
 
 # Escena profesional
 
-(Completar)
+La escena competitiva del juego es altamente profesional, con torneos internacionales y una competencia activa entre equipos de élite. 
+
+![Juego](assets/images/juego.png)
+
+![Major](assets/images/major.png)
 
 # Motivación de la investigación
 
@@ -75,8 +79,9 @@ Aquí veremos los resultados generales del modelo, para más detalle en los resu
 
 Las observaciones y pruebas de modelos revelaron que era posible realizar un modelo de predicciones para CS2, utilizando solamente los datos disponible.
 
-(Completar)
+El modelo muestra una correlación moderada entre las estadísticas seleccionadas (como estadísticas de apertura, estadísticas generales y estadísticas de armas) y la probabilidad de victoria del equipo. Si bien los resultados muestran una capacidad de predicción razonable, se evidenció que el modelo no es completamente preciso, y existen varias áreas de mejora, como considerar cambios en el roster de los equipos, la evolución del meta, y la relevancia de cada rol específico dentro del equipo
 
+Pese a estas limitaciones, el modelo es viable y útil, ofrece estimaciones educadas de la probabilidad de victoria en los enfrentamientos de CS2. Las métricas de precisión son lo suficientemente altas como para ser utilizadas en un contexto práctico, y el análisis sugiere que el modelo podría ser valioso como una herramienta de apoyo para la toma de decisiones estratégicas.
 ### Correlación entre victorias y mapas
 
 Existe una directa relación entre el porcentaje de victorias de los equipo y el mapa escogido, esto en parte a los dos puntos anteriores, y se puede ver reflejado en las predicciones probabilistas que entrega el modelo. Veamos un ejemplo en el que se muestran las probabilidades de cada equipo de ganar un mapa en un enfrentamiento entre ellos:
@@ -86,10 +91,7 @@ Existe una directa relación entre el porcentaje de victorias de los equipo y el
     <img src="assets/images/ejemplo_partido.png" width=200 height=223>
 </p>
 
-(Completar)
-
+Se observa que dadas las probabilidades estimadas por el modelo, hay una clara ventaja para un equipo dependiendo del mapa jugado. Por ejemplo,el equipo Natus Vincere tiene alta probabilidad de ganar mapas como Ancient e Inferno,mientras que Faze tiene una mayor probabilidad de ganar en Vértigo, demostrando así la relevancia que tiene la selección de mapas debido a los puntos fuertes y débiles del equipo.
 # Conclusiones
 
-(Completar)
-
-Es posible predecir el campeón
+El modelo de predicciones para Counter-Strike 2 (CS2) demostró ser viable, proporciona buenas estimaciones sobre las probabilidades de victoria en los enfrentamientos. La selección de mapas es un factor determinante en el resultado de los partidos, y algunas métricas de jugadores, como el ratio de bajas/muertes y la eficiencia tras la primera baja, influyen significativamente en las victorias. Sin embargo, el modelo tiene sus  limitaciones que podrían mejorarse al considerar cambios en los rosters y la evolución del meta. Aun así, ofrece un gran potencial y utilidad como herramienta de apoyo para analistas y aficionados del juego.
