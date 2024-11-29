@@ -13,7 +13,9 @@ En esta página web se explicarán las principales partes del proyecto. Encontra
 
 # Qué es Counter-Strike 2
 
-Counter-Strike 2 (CS2) es el último juego de la saga Counter-Stike desarrollada por Valve, lanzado en 2023, CS2 al igual que sus predecesores, es un juego multijugador tactico de disparos en primera persona. En su modo de juego principal y más popular, la partidas competitivas, dos equipos de cinco jugadores cada uno, se enfrentan en una partida de 24 rondas en alguno de los 7 mapas activos, donde el primero en ganar 13 de ellas se lleva la victoria. Las partidas competitivas están divididas en dos mitades de 12 rondas cada una, en la primera mitad, uno de los equipos juega como el bando antiterrorista y el otro como el bando terrorista, y en la siguiente mitad, los equipos cambian de bandos. En cada ronda los terroristas tienen como objetivo plantar una bomba en alguno de los dos puntos especiales del mapa o bien eliminarlos a todos los antiterroristas. Por otro lado, los antiterroristas tienen como objetivo defender estos puntos por la duración de la ronda, desactivar la bomba en caso de ser plantada o bien eliminar a todos los terroristas.
+Counter-Strike 2 (CS2) es el último juego de la saga Counter-Stike desarrollada por Valve, lanzado en 2023, CS2 al igual que sus predecesores, es un juego multijugador tactico de disparos en primera persona. En su modo de juego principal y más popular, la partidas competitivas, dos equipos de cinco jugadores cada uno, se enfrentan en una partida de 24 rondas en alguno de los 7 mapas activos, donde el primero en ganar 13 de ellas se lleva la victoria. 
+
+Las partidas competitivas están divididas en dos mitades, en la primera mitad, uno de los equipos juega como el bando antiterrorista y el otro como el bando terrorista, y en la siguiente mitad, los equipos cambian de bandos. En cada ronda los terroristas tienen como objetivo plantar una bomba en alguno de los dos puntos especiales del mapa o bien eliminarlos a todos los antiterroristas. Por otro lado, los antiterroristas tienen como objetivo defender estos puntos por la duración de la ronda, desactivar la bomba en caso de ser plantada o bien eliminar a todos los terroristas.
 
 El juego posee mecánicas de juego simples pero capaces de complejizar el juego enormemente, haciendo que cada partida sea única y diferente a la anterior, elevando el nivel de los jugadores mientras más tiempo jueguen. Las más destacables son:
 
@@ -46,6 +48,43 @@ Nuestras preguntas de investigación finales utilizadas para realizar el proyect
     + ¿Es posible realizar un modelo de predicciones con buenas metricas utilizando datos generales de los jugadores y equipos?
 
 # Resultados
+
+
+
+## Relación entre variables y porcentaje de victorias
+
+### Métricas de equipos
+
+En esta matriz de correlación se ve como distintas métricas se relacionan de diferente manera para cada mapa con el porcentaje de victorias de los equipos.
+
+![alt text](image.png)
+
+### Metrícas de jugadores
+
+Se logró determinar cuales son las métricas de los jugadores que, en general, influyen más en el porcentaje de victorias del equipo, y se resumieron en el siguiente gráfico:
+
+![alt text](image-1.png)
+
+Las estadísticas que más destacan son el ratio Kills / Deaths, la direrencia Kills - Deaths y Team win percent after firts kill.
+
+## Modelo de predicciones
+
+Aquí veremos los resultados generales del modelo, para más detalle en los resultado del modelo consulte [Modelos](modelo/).
+
+### Viabilidad del modelo
+
+Las observaciones y pruebas de modelos revelaron que era posible realizar un modelo de predicciones para CS2, utilizando solamente los datos disponible.
+
+(Completar)
+
+### Correlación entre victorias y mapas
+
+Existe una directa relación entre el porcentaje de victorias de los equipo y el mapa escogido, esto en parte a los dos puntos anteriores, y se puede ver reflejado en las predicciones probabilistas que entrega el modelo. Veamos un ejemplo en el que se muestran las probabilidades de cada equipo de ganar un mapa en un enfrentamiento entre ellos:
+
+
+<p align="center">
+    <img src="image-2.png/" width=200 height=223>
+</p>
 
 (Completar)
 
