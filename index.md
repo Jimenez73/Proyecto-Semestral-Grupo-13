@@ -30,7 +30,7 @@ En general, el juego premia el trabajo en equipo y la buena comunicación entre 
 
 # Motivación de la investigación
 
-Cada año se juegan  comienza el Major de Counter-Strike 2 (CS2), la competencia más importante para los equipos profesionales del videojuego, con una suma de premios de 1,250,000 $USD. Este es un evento presencial y que se transmite online con miles de espectadores. Además de los premios, el evento mueve mucho dinero a través ventas en el juego de artículos exclusivos y de mercados de la comunidad con la compra y venta de recompensas por participar en las predicciones del Major, en un mini juego dentro de CS2 conocido como “Pick'em”. También se producen apuestas en páginas externas al juego.
+Cada año se juega el Major de Counter-Strike 2 (CS2), la competencia más importante para los equipos profesionales del videojuego, con una suma de premios de 1,250,000 $USD. Este es un evento presencial y que se transmite online con miles de espectadores. Además de los premios, el evento mueve mucho dinero a través ventas en el juego de artículos exclusivos y de mercados de la comunidad con la compra y venta de recompensas por participar en las predicciones del Major, en un mini juego dentro de CS2 conocido como “Pick'em”. También se producen apuestas en páginas externas al juego.
 
 Debido a la gran cantidad de datos que existe de los equipo y jugadores profesionales, vimos una gran oportunidad para estudiar el funcionamiento de las apuestas y cómo éstas se ven influenciadas por las distintas a características que conforman a los equipos. Esto con el fin de poder predecir con la mayor precisión posible los resultados de los partidos entre los equipos, y así tal vez poder reconocer el campeón del Major antes de que inicie el torneo principal.
 
@@ -57,13 +57,13 @@ Nuestras preguntas de investigación finales utilizadas para realizar el proyect
 
 En esta matriz de correlación se ve como distintas métricas se relacionan de diferente manera para cada mapa con el porcentaje de victorias de los equipos.
 
-![alt text](image.png)
+![Correlación](assets/images/correlacion.png)
 
 ### Metrícas de jugadores
 
 Se logró determinar cuales son las métricas de los jugadores que, en general, influyen más en el porcentaje de victorias del equipo, y se resumieron en el siguiente gráfico:
 
-![alt text](image-1.png)
+![Stats Generales](assets/images/stats_generales.png)
 
 Las estadísticas que más destacan son el ratio Kills / Deaths, la direrencia Kills - Deaths y Team win percent after firts kill.
 
@@ -83,7 +83,7 @@ Existe una directa relación entre el porcentaje de victorias de los equipo y el
 
 
 <p align="center">
-    <img src="image-2.png/" width=200 height=223>
+    <img src="assets/images/ejemplo_partido.png" width=200 height=223>
 </p>
 
 (Completar)
