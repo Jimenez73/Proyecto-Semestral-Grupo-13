@@ -26,7 +26,7 @@ Con el modelo entrenado, es posible pasarle pequeñas muestras de datos que solo
 
 Dada la forma en la que eligen los ganadores estas funciones, es mejor realizar la simulación reiteradas veces para obtener los equipos que más ganan y de esta manera obtener mejor resultados para decir con confianza quién gana.
 
-Para más detalles consulte la [Documentación](documentacion/).
+Para más detalles consulte la [Documentación](../documentacion/).
 
 # Limitaciones del modelo
 
