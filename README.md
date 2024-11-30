@@ -4,9 +4,11 @@ Proyecto semestral del grupo 13 para el curso de Introducción a la Ciencia de D
 ### Integrantes:
 
 - Vicente Araya
-- Aldo Coello
 - Sebastián Jiménez
-- Carolina Neira
+
+### Página del proyecto
+
+https://jimenez73.github.io/Proyecto-Semestral-Grupo-13/
 
 ### Explicación
 
